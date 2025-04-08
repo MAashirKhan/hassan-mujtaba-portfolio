@@ -1,6 +1,6 @@
 'use client';
 import styles from './style.module.scss'
-import Card from './components/project/cards';
+import Card from './components/cards';
 import { useScroll } from 'framer-motion';
 import { useEffect, useRef } from 'react';
 import Lenis from '@studio-freight/lenis'

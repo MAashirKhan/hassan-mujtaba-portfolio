@@ -21,9 +21,10 @@ export default function index() {
                     <span>
                         <div className={styles.imageContainer}>
                             <Image 
-                            fill={true}
+                            style={{ objectFit: "contain", background: "white" }}
                             alt={"image"}
-                            src={`/images/background.jpg`}
+                            fill={true}
+                            src={`/images/websitesolo.png`}
                             />
                         </div>
                         <h2>Let's work</h2>
