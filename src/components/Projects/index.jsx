@@ -1,80 +1,120 @@
-'use client';
-import styles from './style.module.scss'
-import Card from './components/cards';
-import { useScroll } from 'framer-motion';
-import { useEffect, useRef } from 'react';
-import Lenis from '@studio-freight/lenis'
+"use client";
+import styles from "./style.module.scss";
+import Card from "./components/cards";
+import { useScroll } from "framer-motion";
+import { useEffect, useRef } from "react";
+import Lenis from "@studio-freight/lenis";
 
 export default function Home() {
   const container = useRef(null);
   const { scrollYProgress } = useScroll({
     target: container,
-    offset: ['start start', 'end end']
-  })
+    offset: ["start start", "end end"],
+  });
 
   const projects = [
     {
-      title: "Matthias Leidinger",
+      title: "Futafut Prime",
+      tags: ["E-Commerce", "3rd Party Logistics", "Last Mile Service"],
       description:
-        "Originally hailing from Austria, Berlin-based photographer Matthias Leindinger is a young creative brimming with talent and ideas.",
-      src: "rock.jpg",
-      link: "https://www.ignant.com/2023/03/25/ad2186-matthias-leidingers-photographic-exploration-of-awe-and-wonder/",
+        "Futafut Prime empowers MSMEs through digital solutions, enhancing their online presence and participation in the formal economy. Our comprehensive suite of digital financial services and marketplace enables businesses to grow, succeed, and bridge the gender gap in financial inclusion.",
+      src: "/images/wix.jpg",
+      link: "#",
       color: "#BBACAF",
     },
     {
-      title: "Clément Chapillon",
+      title: "Futafut Go",
+      tags: ["Food Delivery", "Nutrition Tracking"],
       description:
-        "This is a story on the border between reality and imaginary, about the contradictory feelings that the insularity of a rocky, arid, and wild territory provokes”—so French photographer Clément Chapillon describes his latest highly captivating project Les rochers fauves (French for ‘The tawny rocks’).",
-      src: "tree.jpg",
-      link: "https://www.ignant.com/2022/09/30/clement-chapillon-questions-geographical-and-mental-isolation-with-les-rochers-fauves/",
+        "Futafut Go is an innovative app revolutionizing nutrition tracking and personalized diet plans. The vision is to empower users to make informed choices about their food intake and develop a healthy relationship with nutrition. Our mission is to support individuals in achieving their fitness goals and promoting a balanced approach to nutrition.",
+      src: "/images/hassanp1.jpeg",
+      link: "#",
       color: "#977F6D",
     },
     {
-      title: "Zissou",
+      title: "Rehabit",
+      tags: ["P2P Telehealth", "Health Technology"],
       description:
-        "Though he views photography as a medium for storytelling, Zissou’s images don’t insist on a narrative. Both crisp and ethereal, they’re encoded with an ambiguity—a certain tension—that lets the viewer find their own story within them.",
-      src: "water.jpg",
-      link: "https://www.ignant.com/2023/10/28/capturing-balis-many-faces-zissou-documents-the-sacred-and-the-mundane-of-a-fragile-island/",
+        "From a pool of registered and qualified therapists, we align physiotherapists according to the bookings and their availability in their respective zones. The therapists get paid on a commission basis in this model.",
+      src: "/images/maven.jpg",
+      link: "#",
       color: "#C2491D",
     },
     {
-      title: "Mathias Svold and Ulrik Hasemann",
+      title: "Rehabit",
+      tags: ["B2B Telehealth", "Health Technology"],
       description:
-        "The coastlines of Denmark are documented in tonal colors in a pensive new series by Danish photographers Ulrik Hasemann and Mathias Svold; an ongoing project investigating how humans interact with and disrupt the Danish coast.",
-      src: "house.jpg",
+        "We approach businesses that engage their workforce, sports teams and similar institutions and provide a free trial of our services where we collect data and gauge interest of their workforce which helps us create a special custom package for the organization according to their needs.",
+      src: "/images/silencio.png",
       link: "https://www.ignant.com/2019/03/13/a-photographic-series-depicting-the-uncertain-future-of-denmarks-treasured-coastlines/",
       color: "#B62429",
     },
     {
-      title: "Mark Rammers",
+      title: "Human Gait PHD Research",
+      tags: ["Remote Physiotherapy", "Joint Tracking System"],
       description:
-        "Dutch photographer Mark Rammers has shared with IGNANT the first chapter of his latest photographic project, ‘all over again’—captured while in residency at Hektor, an old farm in Los Valles, Lanzarote. Titled ‘Beginnings’, the mesmerizing collection of images is a visual and meditative journey into the origins of regrets and the uncertainty of stepping into new unknowns.",
-      src: "cactus.jpg",
-      link: "https://www.ignant.com/2023/04/12/mark-rammers-all-over-again-is-a-study-of-regret-and-the-willingness-to-move-forward/",
+        "This AI-powered physiotherapy solution tracks movements via smartphone/webcam, provides real-time feedback, adapts therapy plans, enables remote monitoring, boosts engagement, and ensures secure, accessible rehab.",
+      src: "/images/powell.jpg",
+      link: "#",
+      color: "#88A28D",
+    },
+    {
+      title: "Spotlight 1: Artistic Work",
+      tags: ["Mural Design", "Artwork"],
+      description: "",
+      src: "/images/maven.jpg",
+      link: "#",
+      color: "#C2491D",
+    },
+    {
+      title: "Spotlight 2: Extra Curricular",
+      tags: ["GDG Kolachi", "Community Work"],
+      description: "",
+      src: "/images/silencio.png",
+      link: "#",
+      color: "#B62429",
+    },
+    {
+      title: "Spotlight 3: Entrepreneurship",
+      tags: ["NIC", "Founder’s Institute", "XSEED Program"],
+      description: "",
+      src: "/images/powell.jpg",
+      link: "#",
       color: "#88A28D",
     },
   ];
-  
 
-  useEffect( () => {
-    const lenis = new Lenis()
+  useEffect(() => {
+    const lenis = new Lenis();
 
     function raf(time) {
-      lenis.raf(time)
-      requestAnimationFrame(raf)
+      lenis.raf(time);
+      requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf)
-  })
+    requestAnimationFrame(raf);
+  });
 
   return (
     <main ref={container} className={styles.main}>
-      {
-        projects.map( (project, i) => {
-          const targetScale = 1 - ( (projects.length - i) * 0.05);
-          return <Card key={`p_${i}`} i={i} {...project} progress={scrollYProgress} range={[i * .25, 1]} targetScale={targetScale}/>
-        })
-      }
+      {projects.map((project, i) => {
+        // const targetScale = 1 - ( (projects.length - i) * 0.05);
+        const total = projects.length;
+        const start = i / total;
+        const end = (i + 1) / total;
+        const targetScale = 1 - (projects.length - i) * 0.05;
+        return (
+          <Card
+            key={`p_${i}`}
+            i={i}
+            {...project}
+            progress={scrollYProgress}
+            // range={[i * 0.25, 1]}
+            range={[start, end]}
+            targetScale={targetScale}
+          />
+        );
+      })}
     </main>
-  )
+  );
 }

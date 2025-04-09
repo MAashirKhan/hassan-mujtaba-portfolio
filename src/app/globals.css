@@ -1,8 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400&display=swap');
 body{
     margin: 0px;
     overflow: hidden; /* Hide scrollbars */
     cursor: wait;
-    font-family: "Bebas Neue", sans-serif;
+    font-family: "Poppins", sans-serif;
 }

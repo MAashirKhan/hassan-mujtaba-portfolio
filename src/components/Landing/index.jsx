@@ -8,71 +8,39 @@ import { slideUp } from './animation';
 import { motion } from 'framer-motion';
 
 export default function Home() {
+
   const firstText = useRef(null);
   const secondText = useRef(null);
-  const thirdText = useRef(null);
-  const fourthText = useRef(null);
-  const sliderLeft = useRef(null);
-  const sliderRight = useRef(null);
-  
-  let xPercentLeft = 0;
-  let xPercentRight = 0;
-  let directionLeft = -1;
-  let directionRight = 1;
+  const slider = useRef(null);
+  let xPercent = 0;
+  let direction = -1;
 
-  useLayoutEffect(() => {
+  useLayoutEffect( () => {
     gsap.registerPlugin(ScrollTrigger);
-    
-    // For scroll effect on both sliders
-    gsap.to(sliderLeft.current, {
+    gsap.to(slider.current, {
       scrollTrigger: {
         trigger: document.documentElement,
         scrub: 0.25,
         start: 0,
         end: window.innerHeight,
-        onUpdate: e => directionLeft = e.direction * -1
+        onUpdate: e => direction = e.direction * -1
       },
       x: "-500px",
-    });
-    
-    gsap.to(sliderRight.current, {
-      scrollTrigger: {
-        trigger: document.documentElement,
-        scrub: 0.25,
-        start: 0,
-        end: window.innerHeight,
-        onUpdate: e => directionRight = e.direction * 1
-      },
-      x: "500px",
-    });
-    
+    })
     requestAnimationFrame(animate);
-  }, []);
+  }, [])
 
   const animate = () => {
-    // Animation for left slider
-    if(xPercentLeft < -100){
-      xPercentLeft = 0;
+    if(xPercent < -100){
+      xPercent = 0;
     }
-    else if(xPercentLeft > 0){
-      xPercentLeft = -100;
+    else if(xPercent > 0){
+      xPercent = -100;
     }
-    gsap.set(firstText.current, {xPercent: xPercentLeft});
-    gsap.set(secondText.current, {xPercent: xPercentLeft});
-    
-    // Animation for right slider
-    if(xPercentRight > 100){
-      xPercentRight = 0;
-    }
-    else if(xPercentRight < 0){
-      xPercentRight = 100;
-    }
-    gsap.set(thirdText.current, {xPercent: xPercentRight});
-    gsap.set(fourthText.current, {xPercent: xPercentRight});
-    
+    gsap.set(firstText.current, {xPercent: xPercent})
+    gsap.set(secondText.current, {xPercent: xPercent})
     requestAnimationFrame(animate);
-    xPercentLeft += 0.1 * directionLeft;
-    xPercentRight += 0.1 * directionRight;
+    xPercent += 0.1 * direction;
   }
 
   return (
@@ -83,24 +51,19 @@ export default function Home() {
         alt="background"
         style={{ objectFit: "contain", background: 'black', zIndex: -2 }}
       />
-      
-      {/* Left scrolling text */}
-      <div style={{zIndex: 2}}>
-        <div className={styles.sliderContainerLeft}>
-          <div ref={sliderLeft} className={styles.slider}>
-            <p ref={firstText}>HASSAN MUJTABA</p>
-            <p ref={secondText}>HASSAN MUJTABA</p>
-          </div>
+      <div className={styles.sliderContainer}>
+        <div ref={slider} className={styles.slider}>
+          <p ref={firstText}>Media Buyer - Research Assistant -</p>
+          <p ref={secondText}>Media Buyer - Research Assistant -</p>
         </div>
-        
-        {/* Right scrolling text
-        <div className={styles.sliderContainerRight}>
-          <div ref={sliderRight} className={styles.slider}>
-            <p ref={thirdText}>HASSAN MUJTABA</p>
-            <p ref={fourthText}>HASSAN MUJTABA</p>
-          </div>
-        </div> */}
       </div>
+      {/* <div data-scroll data-scroll-speed={0.1} className={styles.description}>
+        <svg width="9" height="9" viewBox="0 0 9 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M8 8.5C8.27614 8.5 8.5 8.27614 8.5 8L8.5 3.5C8.5 3.22386 8.27614 3 8 3C7.72386 3 7.5 3.22386 7.5 3.5V7.5H3.5C3.22386 7.5 3 7.72386 3 8C3 8.27614 3.22386 8.5 3.5 8.5L8 8.5ZM0.646447 1.35355L7.64645 8.35355L8.35355 7.64645L1.35355 0.646447L0.646447 1.35355Z" fill="white"/>
+        </svg>
+        <p>Freelance</p>
+        <p>Designer & Developer</p>
+      </div> */}
     </motion.main>
   )
 }
